@@ -7,7 +7,7 @@ module Consul
     # @see Consul::Client::V1#local_service
     class LocalService
       # @api private
-      def initialize(name, http:, logger:)
+      def initialize(name, http = nil, logger = nil)
         @name   = name
         @consul = http
         @consul.logger = logger
@@ -27,7 +27,7 @@ module Consul
       # @param grace_period [Integer] number of seconds to sleep after service
       #          has been marked unhealthy in the cluster. This is important so
       #          that any in-flight requests are still able to be handled.
-      def coordinated_shutdown!(min_nodes: 1, grace_period: 3, &block)
+      def coordinated_shutdown!(min_nodes = 1, grace_period = 3, &block)
         cluster = Consul::Client.v1.service(name, consul: consul)
 
         cluster.lock("shutdown") do

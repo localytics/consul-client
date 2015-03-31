@@ -6,7 +6,7 @@ module Consul
     # @see Consul::Client::V1#service
     class Service
       # @api private
-      def initialize(name, consul: Consul::Client.v1.http)
+      def initialize(name, consul = Consul::Client.v1.http)
         @name   = name
         @consul = consul
       end
@@ -20,7 +20,7 @@ module Consul
       #           so make sure it does not conflict with other names. For
       #           instance, the leader lock for the +web+ service would be
       #           stored at +/kv/web/leader+.
-      def lock(key, checks: ["service:#{name}"], &block)
+      def lock(key, checks = ["service:#{name}"], &block)
         session = consul.put("/session/create",
           LockDelay: '3s',
           Checks:    ["serfHealth"] + checks
@@ -53,7 +53,7 @@ module Consul
       #           healthy for the cluster as a whole to be considered healthy.
       #           This method will block until there is at least one more than
       #           this number, assuming that the caller is about to terminate.
-      def wait_until_healthy!(min_nodes: 1)
+      def wait_until_healthy!(min_nodes = 1)
         consul.get_while("/health/service/#{name}?passing") do |data|
           data.size <= min_nodes
         end

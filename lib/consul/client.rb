@@ -31,7 +31,7 @@ module Consul
       # @example
       #     local = Consul::Client.v1.local_service('web')
       #     local.coordinated_shutdown! { $healthy = false }
-      def local_service(name, http:Consul::Client.v1.http(), logger:http.logger)
+      def local_service(name, http = Consul::Client.v1.http(), logger = http.logger)
         LocalService.new(name, http: http, logger: logger)
       end
 
@@ -53,8 +53,8 @@ module Consul
       # @example
       #     http = Consul::Client.v1.http(logger: Logger.new($stdout))
       #     puts http.get("/get/self")["Member"]["Name"]
-      def http(host: "localhost", port: 8500, logger: NULL_LOGGER)
-        HTTP.new(host: host, port: port, logger: logger)
+      def http(host = "localhost", port = 8500, logger = NULL_LOGGER)
+        HTTP.new(host, port, logger)
       end
     end
   end

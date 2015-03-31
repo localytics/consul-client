@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://github.com/xaviershay/consul-client"
 
   gem.executables   = []
-  gem.required_ruby_version = '>= 2.1.2'
+  gem.required_ruby_version = '>= 2.0'
   gem.files         = Dir.glob("{spec,lib}/**/*.rb") + %w(
                         README.md
                         consul-client.gemspec
@@ -22,6 +22,6 @@ Gem::Specification.new do |gem|
   gem.name          = "consul-client"
   gem.require_paths = ["lib"]
   gem.license       = "Apache 2.0"
-  gem.version       = '0.1.1'
+  gem.version       = '0.1.9'
   gem.has_rdoc      = false
 end

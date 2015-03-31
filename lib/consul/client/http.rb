@@ -14,7 +14,7 @@ module Consul
     # @see Consul::Client::V1#http
     class HTTP
       # @api private
-      def initialize(host:, port:, logger:)
+      def initialize(host = nil, port = nil, logger = nil)
         @host   = host
         @port   = port
         @logger = logger
